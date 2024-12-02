@@ -30,14 +30,14 @@ const actions: {
 ];
 const NavActions = () => {
   return (
-    <div className="flex items-center gap-8 md:flex-row flex-col">
+    <div className="flex items-center gap-6 md:flex-row flex-col">
       {actions.map(({ icon:Icon, label, href }, index) => (
         <Button
           key={index}
           variant="ghost"
           className="text-black font-medium text-base rounded-full"
         >
-          
+          <Icon />
         </Button>
       ))}
     </div>

@@ -11,7 +11,7 @@ const ProductsGrid = () => {
                 Our Products
             </h2>
         </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-screen-2xl w-full">
+      <div className="grid gap-y-10 grid-cols-[repeat(1,max-content)] sm:grid-cols-[repeat(2,max-content)] md:grid-cols-[repeat(3,max-content)] lg:grid-cols-[repeat(4,max-content)] justify-between max-w-screen-2xl w-full">
 
         <ProductItem />
         <ProductItem />

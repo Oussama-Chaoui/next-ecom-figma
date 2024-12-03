@@ -1,4 +1,5 @@
 import CategoriesBanner from "@/components/landing/categories-banner"
+import Designs from "@/components/landing/designs"
 import Hero from "@/components/landing/hero"
 import ProductsGrid from "@/components/landing/products-grid"
 
@@ -8,6 +9,7 @@ const LandingPage = () => {
       <Hero />
       <CategoriesBanner />
       <ProductsGrid />
+      <Designs/>
     </div>
   )
 }

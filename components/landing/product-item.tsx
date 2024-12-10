@@ -4,6 +4,7 @@ import { ArrowLeftRight, Heart, Share } from "lucide-react";
 import { Poppins } from "next/font/google";
 import Image from "next/image"
 import { MouseEventHandler, useState } from "react";
+import { Button } from "../ui/button";
 
 const poppins = Poppins({ subsets: ['latin'],weight:["400","500","600","700"] });
 
@@ -26,19 +27,19 @@ const ProductItem = () => {
               <button className="h-[48px] w-[202px] bg-white flex items-center justify-center focus:outline-none text-primarySite font-semibold">
                 Add To Cart
               </button>
-              <div className="flex items-center text-white gap-4">
-                <div className="flex items-center gap-2 font-semibold">
-                  <Share size={16} color="#fff" strokeWidth={3} />
-                  <p>Share</p>
-                </div>
-                <div className="flex items-center gap-2 font-semibold">
-                  <ArrowLeftRight size={16} color="#fff" strokeWidth={3} />
-                  <p>Compare</p>
-                </div>
-                <div className="flex items-center gap-2 font-semibold">
-                  <Heart size={16} color="#fff" strokeWidth={3} />
-                  <p>Like</p>
-                </div>
+              <div className="flex items-center text-white gap-2 w-full px-1">
+                <button className="w-1/3 flex items-center justify-center gap-1 font-semibold hover:bg-opacity-30 focus:outline-none hover:bg-white p-2 hover:rounded-sm">
+                  <Share size={14} color="#fff" strokeWidth={3} />
+                  <p className="text-xs">Share</p>
+                </button>
+                <button className="w-1/3 flex items-center justify-center gap-1 font-semibold hover:bg-opacity-30 focus:outline-none hover:bg-white p-2 hover:rounded-sm">
+                  <ArrowLeftRight size={14} color="#fff" strokeWidth={3} />
+                  <p className="text-xs">Compare</p>
+                </button>
+                <button className="w-1/3 flex items-center justify-center gap-1 font-semibold hover:bg-opacity-30 focus:outline-none hover:bg-white p-2 hover:rounded-sm">
+                  <Heart size={14} color="#fff" strokeWidth={3} />
+                  <p className="text-xs">Like</p>
+                </button>
               </div>
             </div>
           )

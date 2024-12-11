@@ -20,10 +20,10 @@ const ProductItem = () => {
     setIsHover(false);
   };
   return (
-    <div className={cn("w-[285px] h-[446px] bg-[#F4F5F7] relative")} onMouseEnter={handleHover} onMouseLeave={handleMouseLeave}>
+    <div className={cn("w-[220px] h-[400px] bg-[#F4F5F7] relative")} onMouseEnter={handleHover} onMouseLeave={handleMouseLeave}>
         {
           isHover && (
-            <div className={cn(poppins.className,"absolute top-0 left-0 w-[285px] h-[446px] bg-[#3A3A3A] bg-opacity-70 flex flex-col items-center justify-center gap-4")}>
+            <div className={cn(poppins.className,"absolute top-0 left-0 w-[220px] h-[400px] bg-[#3A3A3A] bg-opacity-70 flex flex-col items-center justify-center gap-4")}>
               <button className="h-[48px] w-[202px] bg-white flex items-center justify-center focus:outline-none text-primarySite font-semibold">
                 Add To Cart
               </button>

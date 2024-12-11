@@ -8,12 +8,17 @@ const montserrat = Montserrat({
 });
 
 const Icon = ({ title }: { title?: string }) => {
-  if (!title) return <SVG name="logo" />;
+  if (!title) return <SVG name="logo"  />;
   return (
     <div className="flex items-center gap-1">
-      <SVG name="logo" />
+      <div className="md:block hidden">
+        <SVG name="logo" />
+      </div>
+      <div className="block md:hidden">
+        <SVG name="logo" height={28} width={35} />
+      </div>
 
-      <h1 className={cn("text-[34px] font-bold", montserrat.className)}>
+      <h1 className={cn("md:text-[34px] font-bold text-xl", montserrat.className)}>
         {title}
       </h1>
     </div>

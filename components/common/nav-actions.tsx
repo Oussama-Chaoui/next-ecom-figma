@@ -1,6 +1,7 @@
 import { Heart, LucideIcon, Search, ShoppingBasket, User } from "lucide-react";
 import { Button } from "../ui/button";
 import SVG from "./svg";
+import { Cart } from "./cart";
 
 const actions: {
   icon: LucideIcon;
@@ -21,16 +22,11 @@ const actions: {
     icon: Heart,
     label: "Heart",
     href: "/heart",
-  },
-  {
-    icon: ShoppingBasket,
-    label: "Cart",
-    href: "/cart",
-  },
+  }
 ];
 const NavActions = () => {
   return (
-    <div className="flex items-center gap-6 md:flex-row flex-col">
+    <div className="md:flex items-center xl:gap-6 lg:gap-1  hidden">
       {actions.map(({ icon:Icon, label, href }, index) => (
         <Button
           key={index}
@@ -40,6 +36,7 @@ const NavActions = () => {
           <Icon />
         </Button>
       ))}
+      <Cart />
     </div>
   );
 };

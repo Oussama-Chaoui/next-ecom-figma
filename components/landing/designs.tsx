@@ -4,6 +4,7 @@ import { ArrowRight } from "lucide-react";
 import { Poppins } from "next/font/google";
 import Image from "next/image";
 import { useState } from "react";
+import { Button } from "../ui/button";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -73,7 +74,9 @@ const Designs = () => {
                 </h1>
               </div>
               <div className="absolute bottom-5 left-[239px] h-[50px] w-[50px] z-10 bg-primarySite  flex  items-center justify-center">
-                <ArrowRight color="white" />
+                <Button variant="ghost" className="hover:bg-transparent">
+                  <ArrowRight color="white" className="!h-8 !w-8" />
+                </Button>
               </div>
             </div>
           </div>
@@ -193,7 +196,12 @@ const Designs = () => {
                 </h1>
               </div>
               <div className="absolute bottom-5 left-[239px] h-[50px] w-[50px] z-10 bg-primarySite  flex  items-center justify-center">
-                <ArrowRight color="white" />
+                <Button
+                  variant="ghost"
+                  className="hover:bg-transparent h-full w-full"
+                >
+                  <ArrowRight color="white" className="!h-8 !w-8" />
+                </Button>
               </div>
             </div>
           </div>

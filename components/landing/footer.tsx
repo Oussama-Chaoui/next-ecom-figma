@@ -8,42 +8,54 @@ const poppins = Poppins({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 });
+
+// Updated links for a real estate context
 const links = [
   { href: "/", label: "Home" },
-  { href: "/", label: "Shop" },
-  { href: "/", label: "About" },
-  { href: "/", label: "Contact" },
-]; // TODO: add global constants for links
+  { href: "/properties", label: "Properties" },
+  { href: "/about", label: "About Us" },
+  { href: "/contact", label: "Contact" },
+];
+
 const helps = [
-  { href: "/", label: "Payment Options" },
-  { href: "/", label: "Returns" },
-  { href: "/", label: "Privacy Policies" },
-]; // TODO: add global constants for help
+  { href: "/privacy-policy", label: "Privacy Policy" },
+  { href: "/terms-of-service", label: "Terms of Service" },
+  { href: "/faq", label: "FAQ" },
+];
+
 const Footer = () => {
   return (
-    <div
+    <footer
       className={cn(
         poppins.className,
-        "w-full md:px-16 px-10 md:py-12 py-6 flex items-center justify-center bg-white border-t-2 border-t-[#D9D9D9]"
+        "w-full md:px-16 px-10 md:py-12 py-6 flex items-center justify-center bg-[#f8f8f8] border-t-2 border-gray-200"
       )}
     >
-      <div className="max-w-screen-2xl w-full flex flex-col">
-        <div className="w-full flex justify-between ">
-          <div className="flex flex-col md:w-[30%] w-[48%] md:gap-y-8 gap-y-2">
-            <h1 className="md:text-2xl text-lg font-bold text-black">Funiro.</h1>
-            <p className="text-[#9F9F9F] md:max-w-[285px] md:text-base text-xs">
-              400 University Drive Suite 200 Coral Gables, FL 33134 USA
+      <div className="max-w-screen-2xl w-full flex flex-col gap-y-10">
+        {/* Top Section */}
+        <div className="w-full flex flex-col md:flex-row justify-between gap-8">
+          {/* Brand Section */}
+          <div className="flex flex-col md:w-[30%] w-full gap-y-6">
+            <h1 className="md:text-3xl text-2xl font-bold text-black">Estato.</h1>
+            <p className="text-gray-600 md:max-w-[285px] text-sm leading-relaxed">
+              Premium real estate listings designed for elegance and quality living. Find your dream home with Estato.
+            </p>
+            <p className="text-sm text-gray-500">
+              400 Avenue Hassan II, Casablanca, Morocco
             </p>
           </div>
-          <div className="flex md:w-[30%] justify-between">
-            <div className="md:flex hidden flex-col gap-y-8">
-              <h3 className="font-medium text-[#9F9F9F]">Links</h3>
+
+          {/* Links Section */}
+          <div className="flex md:w-[40%] w-full justify-around">
+            {/* Useful Links */}
+            <div className="flex flex-col gap-y-4">
+              <h3 className="text-lg font-semibold text-gray-800">Explore</h3>
               {links.map(({ href, label }, index) => (
                 <Link href={href} key={index}>
                   <Button
                     className={cn(
                       poppins.className,
-                      "text-black font-medium text-base ml-0 pl-0"
+                      "text-gray-700 font-medium text-sm pl-0 hover:text-primarySite transition"
                     )}
                     variant={"link"}
                   >
@@ -52,14 +64,16 @@ const Footer = () => {
                 </Link>
               ))}
             </div>
-            <div className="md:flex hidden flex-col gap-y-8">
-              <h3 className="font-medium text-[#9F9F9F]">Help</h3>
+
+            {/* Help Section */}
+            <div className="flex flex-col gap-y-4">
+              <h3 className="text-lg font-semibold text-gray-800">Support</h3>
               {helps.map(({ href, label }, index) => (
                 <Link href={href} key={index}>
                   <Button
                     className={cn(
                       poppins.className,
-                      "text-black font-medium text-base ml-0 pl-0"
+                      "text-gray-700 font-medium text-sm pl-0 hover:text-primarySite transition"
                     )}
                     variant={"link"}
                   >
@@ -69,20 +83,44 @@ const Footer = () => {
               ))}
             </div>
           </div>
-          <div className="flex flex-col md:gap-y-8 gap-y-2 md:w-[30%] w-[48%]">
-            <h3 className="font-medium text-[#9F9F9F] ">Newsletter</h3>
-            <div className="flex md:flex-row  flex-col w-full max-w-sm items-center gap-2">
-              <Input type="email" className="md:text-base text-xs" placeholder="Email" />
-              <Button type="submit" className="md:inline-flex hidden">Subscribe</Button>
-              <Button type="submit" size={"sm"} className="md:hidden inline-flex w-full">Subscribe</Button>
+
+          {/* Newsletter Section */}
+          <div className="flex flex-col md:w-[30%] w-full gap-y-4">
+            <h3 className="text-lg font-semibold text-gray-800">Stay Updated</h3>
+            <p className="text-sm text-gray-600">
+              Subscribe to receive the latest property listings and market trends directly to your inbox.
+            </p>
+            <div className="flex w-full gap-2">
+              <Input
+                type="email"
+                placeholder="Enter your email"
+                className="text-sm focus:outline-none border-gray-300"
+              />
+              <Button className="bg-primarySite text-white px-6 py-2 hover:bg-opacity-90 transition">
+                Subscribe
+              </Button>
             </div>
           </div>
         </div>
-        <div className="w-full flex border-t border-t-[#D9D9D9] md:mt-8 md:pt-8 mt-2 pt-2">
-            <p className="md:text-base text-xs">2023 furino. All rights reserved</p>
+
+        {/* Bottom Section */}
+        <div className="w-full flex flex-col md:flex-row justify-between items-center border-t border-gray-300 pt-6 text-sm text-gray-600">
+          <p>© {new Date().getFullYear()} Estato. All rights reserved.</p>
+          <div className="flex gap-4">
+            <Link href="/terms-of-service">
+              <span className="hover:text-primarySite transition cursor-pointer">
+                Terms of Service
+              </span>
+            </Link>
+            <Link href="/privacy-policy">
+              <span className="hover:text-primarySite transition cursor-pointer">
+                Privacy Policy
+              </span>
+            </Link>
+          </div>
         </div>
       </div>
-    </div>
+    </footer>
   );
 };
 

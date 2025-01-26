@@ -1,7 +1,5 @@
-import { Heart, LucideIcon, Search, ShoppingBasket, User } from "lucide-react";
+import { Heart, LucideIcon, Search, User } from "lucide-react";
 import { Button } from "../ui/button";
-import SVG from "./svg";
-import { Cart } from "./cart";
 
 const actions: {
   icon: LucideIcon;
@@ -36,7 +34,6 @@ const NavActions = () => {
           <Icon />
         </Button>
       ))}
-      <Cart />
     </div>
   );
 };

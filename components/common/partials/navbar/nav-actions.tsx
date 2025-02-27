@@ -1,5 +1,5 @@
 import { Heart, LucideIcon, Search, User } from "lucide-react";
-import { Button } from "../ui/button";
+import { Button } from "../../../ui/button";
 
 const actions: {
   icon: LucideIcon;

@@ -1,8 +1,8 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/components/lib/utils/twMerge";
 import { Poppins } from "next/font/google";
 import Link from "next/link";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
+import { Button } from "../../ui/button";
+import { Input } from "../../ui/input";
 
 const poppins = Poppins({
   subsets: ["latin"],

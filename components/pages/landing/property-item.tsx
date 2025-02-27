@@ -1,5 +1,5 @@
 "use client";
-import { cn } from "@/lib/utils";
+import { cn } from "@/components/lib/utils/twMerge";
 import { Heart, Share } from "lucide-react";
 import { Poppins } from "next/font/google";
 import Image from "next/image";

@@ -1,10 +1,10 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/components/lib/utils/twMerge";
 import { Montserrat } from "next/font/google";
-import SVG from "./svg";
+import SVG from "../../svg";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
-  weight: ["400", "600", "700"], // Specify the weights you want
+  weight: ["400", "600", "700"],
 });
 
 const Icon = ({ title }: { title?: string }) => {

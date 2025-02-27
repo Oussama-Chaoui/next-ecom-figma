@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { Button } from "../ui/button";
+import { Button } from "../../../ui/button";
 import { Poppins } from "next/font/google";
-import { cn } from "@/lib/utils";
+import { cn } from "@/components/lib/utils/twMerge";
 
 const links = [
   { href: "/", label: "Home" },

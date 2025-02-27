@@ -1,10 +1,10 @@
 "use client";
-import { cn } from "@/lib/utils";
+import { cn } from "@/components/lib/utils/twMerge";
 import { ArrowRight } from "lucide-react";
 import { Poppins } from "next/font/google";
 import Image from "next/image";
 import { useState } from "react";
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 
 const poppins = Poppins({
   subsets: ["latin"],

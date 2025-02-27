@@ -1,8 +1,8 @@
-import { Cart } from "./cart";
-import Icon from "./icon";
-import NavActions from "./nav-actions";
-import Navigation from "./navigation";
-import { ResponsiveNavbar } from "./responsive-navbar";
+import { Cart } from "../partials/navbar/cart";
+import Icon from "../partials/navbar/icon";
+import NavActions from "../partials/navbar/nav-actions";
+import Navigation from "../partials/navbar/navigation";
+import { ResponsiveNavbar } from "../partials/navbar/responsive-navbar";
 
 const Navbar = () => {
   return (

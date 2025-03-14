@@ -1,229 +1,309 @@
 "use client";
 import { cn } from "@/components/lib/utils/twMerge";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, MoveRight } from "lucide-react";
 import { Poppins } from "next/font/google";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "../../ui/button";
+import { motion, AnimatePresence } from "framer-motion";
 
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 });
 
-// Array of all images
-const images = [
-  "/house_1.jpg",
-  "/house_2.jpg",
-  "/house_3.jpg",
-  "/house_4.jpg",
-  "/house_5.jpg",
+const properties = [
+  {
+    id: 1,
+    image: "/house_1.jpg",
+    title: "Oceanview Villa",
+    location: "Tangier",
+    price: "25,000,000 MAD",
+    description: "Luxurious Mediterranean retreat with panoramic ocean views"
+  },
+  {
+    id: 2,
+    image: "/house_2.jpg",
+    title: "Riad Elegance",
+    location: "Marrakech",
+    price: "18,500,000 MAD",
+    description: "Authentic Moroccan riad in the heart of the medina"
+  },
+  {
+    id: 3,
+    image: "/house_3.jpg",
+    title: "Modern City Loft",
+    location: "Casablanca",
+    price: "32,000,000 MAD",
+    description: "Contemporary urban living in Morocco's business hub"
+  },
+  {
+    id: 4,
+    image: "/house_4.jpg",
+    title: "Blue Kasbah Retreat",
+    location: "Chefchaouen",
+    price: "12,750,000 MAD",
+    description: "Traditional kasbah with stunning Rif Mountain views"
+  },
+  {
+    id: 5,
+    image: "/house_5.jpg",
+    title: "Summer Beach Villa",
+    location: "Fnideq",
+    price: "15,000,000 MAD",
+    description: "Exclusive Mediterranean beachfront property"
+  },
 ];
 
 const FeaturedProperties = () => {
-  // Track the selected main image
-  const [image, setImage] = useState<string>(images[0]);
+  const [activeProperty, setActiveProperty] = useState(0);
+  const [direction, setDirection] = useState<"left" | "right">("right");
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+
+
+  const handleNext = () => {
+    setDirection("right");
+    setActiveProperty((prev) => (prev + 1) % properties.length);
+  };
+
+  const handlePrev = () => {
+    setDirection("left");
+    setActiveProperty((prev) => (prev - 1 + properties.length) % properties.length);
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50; // Minimum swipe distance
+    const isRightSwipe = distance < -50;
+
+    if (isLeftSwipe) handleNext();
+    if (isRightSwipe) handlePrev();
+
+    // Reset values
+    setTouchStart(0);
+    setTouchEnd(0);
+  };
+
+
+
+  useEffect(() => {
+    const interval = setInterval(handleNext, 8000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <div className="flex-col gap-8 items-center md:px-16 px-10 py-12 w-full bg-primaryLight flex justify-center min-h-[670px] overflow-hidden">
-      <div className="max-w-screen-2xl w-full flex gap-4 md:flex-row flex-col">
-        {/* Left Section */}
-        <div className="lg:min-w-[33%] lg:max-w-[40%] md:min-w-[50%] flex flex-col items-start justify-center gap-4">
-          <h1
-            className={cn(
-              poppins.className,
-              "md:text-[40px] text-[26px] font-bold text-[#3A3A3A]"
-            )}
+    <section className="w-full bg-[#FAF3EA] py-12 px-4 sm:px-8">
+      <div className="max-w-screen-2xl mx-auto">
+        {/* Header */}
+        <div className="flex flex-col lg:flex-row justify-between gap-8 mb-16">
+          <div className="max-w-[400] space-y-6">
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className={cn(
+                poppins.className,
+                "text-5xl md:text-6xl font-bold text-slate-900 leading-tight",
+                "bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent"
+              )}
+            >
+              Moroccan Luxury Estates
+            </motion.h1>
+            <p
+              className={cn(
+                poppins.className,
+                "text-slate-600 text-xl font-medium leading-relaxed"
+              )}
+            >
+              Discover Morocco's most exclusive properties, from coastal villas to historic riads
+            </p>
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.2 }}
           >
-            50+ Beautiful Real Estate Listings
-          </h1>
-          <p className={cn(poppins.className, "text-[#616161] font-medium")}>
-            Discover our curated selection of stunning properties that will
-            inspire your next move.
-          </p>
-          <Button
-            onClick={() => setImage(images[1])}
-            className={cn(
-              poppins.className,
-              "text-white font-semibold tracking-widest uppercase bg-primarySite px-[72px] py-[25px] hover:text-black focus:outline-none md:mt-6 mt-2"
-            )}
-          >
-            View More
-          </Button>
+            <Button
+              className={cn(
+                poppins.className,
+                "group w-fit px-8 py-6 bg-gradient-to-r from-slate-900 to-slate-700 text-white",
+                "text-lg font-semibold tracking-wide rounded-xl",
+                "hover:scale-[1.02] transition-all duration-300",
+                "shadow-lg hover:shadow-xl shadow-slate-900/10",
+                "flex items-center gap-3"
+              )}
+            >
+              Explore Collection
+              <MoveRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+            </Button>
+          </motion.div>
         </div>
 
-        {/* Desktop: Right Section */}
-        <div className="hidden md:flex gap-4">
-          {/* Main (Selected) Image */}
-          <div className="max-w-[404px] h-full flex items-center justify-center">
-            <div className="w-[404px] h-[582px] relative bg-slate-500">
-              <Image src={image} alt="property" fill className="object-cover" />
-              {/* Info Overlay */}
-              <div className="absolute bottom-5 left-5 h-[130px] w-[219px] bg-white bg-opacity-50 backdrop-blur-sm flex flex-col items-center justify-center">
-                <div className="flex items-center">
-                  <p
-                    className={cn(
-                      poppins.className,
-                      "text-[#616161] font-medium "
-                    )}
-                  >
-                    {/* Just a static "01" for now, 
-                        or you could dynamically figure out which index + 1 if you want */}
-                    {String(images.indexOf(image) + 1).padStart(2, "0")}
-                  </p>
-                  <p
-                    className={cn(
-                      poppins.className,
-                      "text-[#616161] font-medium ml-10 relative"
-                    )}
-                  >
-                    <span className="absolute left-[-52%] translate-y-[50%] translate-x-[75%] bottom-[50%] w-8 h-[2px] bg-[#616161]" />
-                    Downtown Loft
-                  </p>
+        {/* Gallery */}
+        {/* Set grid height on large screens so both columns are equal */}
+        <div className="grid lg:grid-cols-[1fr_400px] gap-8 h-[500px] lg:h-[600px]">
+          {/* Main Image */}
+          {/* Remove aspect ratio classes and use h-full to fill the grid cell */}
+          <div
+            className="relative h-full rounded-2xl overflow-hidden group"
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
+            <AnimatePresence initial={false} custom={direction}>
+              <motion.div
+                key={activeProperty}
+                custom={direction}
+                initial={{ opacity: 0, x: direction === "right" ? 100 : -100 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: direction === "right" ? -100 : 100 }}
+                transition={{ duration: 0.6, ease: "easeInOut" }}
+                className="absolute inset-0"
+              >
+                <Image
+                  src={properties[activeProperty].image}
+                  alt={properties[activeProperty].title}
+                  fill
+                  className="object-cover"
+                  priority
+                />
+
+                {/* Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-transparent" />
+
+                {/* Info Card */}
+                <div className="absolute bottom-6 left-6 right-6 bg-white/70 backdrop-blur-xl p-6 rounded-xl shadow-2xl">
+                  <div className="flex justify-between items-start">
+                    <div className="space-y-2">
+                      <div className="flex items-center gap-4">
+                        <span
+                          className={cn(
+                            poppins.className,
+                            "text-primarySite font-semibold text-2xl"
+                          )}
+                        >
+                          {String(activeProperty + 1).padStart(2, "0")}
+                        </span>
+                        <div className="h-px w-8 bg-slate-300" />
+                        <span className="text-slate-500 font-medium">
+                          {properties[activeProperty].location}
+                        </span>
+                      </div>
+                      <h2
+                        className={cn(
+                          poppins.className,
+                          "text-3xl font-bold text-slate-900"
+                        )}
+                      >
+                        {properties[activeProperty].title}
+                      </h2>
+                      <p
+                        className={cn(
+                          poppins.className,
+                          "text-lg text-slate-600 mt-1"
+                        )}
+                      >
+                        {properties[activeProperty].description}
+                      </p>
+                      <p
+                        className={cn(
+                          poppins.className,
+                          "text-2xl font-semibold text-primarySite mt-2"
+                        )}
+                      >
+                        {properties[activeProperty].price}
+                      </p>
+                    </div>
+                    <button
+                      className="p-4 bg-primarySite rounded-xl hover:bg-primarySite/90 transition-colors shadow-lg cursor-pointer z-50"
+                    >
+                      <ArrowRight className="h-7 w-7 text-white" />
+                    </button>
+                  </div>
                 </div>
-                <h1
-                  className={cn(
-                    poppins.className,
-                    "font-semibold text-[28px] text-[#3A3A3A]"
-                  )}
-                >
-                  Your Dream Home
-                </h1>
-              </div>
-              {/* Next Arrow Button (optional placeholder action) */}
-              <div className="absolute bottom-5 left-[239px] h-[50px] w-[50px] z-10 bg-primarySite flex items-center justify-center">
-                <Button variant="ghost" className="hover:bg-transparent">
-                  <ArrowRight color="white" className="!h-8 !w-8" />
-                </Button>
-              </div>
+              </motion.div>
+            </AnimatePresence>
+
+            {/* Navigation Arrows */}
+            <div className="absolute inset-y-0 w-full flex justify-between items-center px-6">
+              <button
+                onClick={handlePrev}
+                className="p-3 bg-white/90 backdrop-blur-sm rounded-xl shadow-lg hover:scale-105 transition-transform hidden lg:block"
+              >
+                <ArrowRight className="h-8 w-8 text-slate-900 rotate-180" />
+              </button>
+              <button
+                onClick={handleNext}
+                className="p-3 bg-white/90 backdrop-blur-sm rounded-xl shadow-lg hover:scale-105 transition-transform hidden lg:block"
+              >
+                <ArrowRight className="h-8 w-8 text-slate-900" />
+              </button>
             </div>
           </div>
 
-          {/* Additional (Thumbnail) Images */}
-          <div className="relative flex flex-col gap-4">
-            <div className="flex h-[486px] items-start gap-8 absolute">
-              {images.slice(1).map((img, idx) => (
-                <div
-                  key={idx}
-                  className="w-[372px] h-[486px] relative bg-slate-500 cursor-pointer"
-                  onClick={() => setImage(img)}
-                >
-                  <Image
-                    src={img}
-                    alt={`property_${idx}`}
-                    fill
-                    className="object-cover"
-                  />
+          {/* Thumbnails */}
+          <div className="hidden lg:flex flex-col gap-4 h-[600px] overflow-y-auto scrollbar-hide pr-2 pb-1">
+            {properties.map((property, index) => (
+              <motion.div
+                key={property.id}
+                whileHover={{ scale: 1.02 }}
+                className={cn(
+                  "relative aspect-square cursor-pointer transition-all",
+                  "border-2 hover:border-primarySite/30 rounded-xl overflow-hidden",
+                  index === activeProperty ? "border-primarySite scale-[1.01]" : "border-slate-200"
+                )}
+                onClick={() => setActiveProperty(index)}
+              >
+                <Image
+                  src={property.image}
+                  alt={property.title}
+                  fill
+                  className="object-cover"
+                />
+                <div className="absolute bottom-3 left-3 right-3 bg-white/90 backdrop-blur-sm p-3 rounded-lg shadow-sm">
+                  <div className="flex justify-between items-center">
+                    <div>
+                      <p className="font-semibold text-slate-900">{property.title}</p>
+                      <p className="text-sm text-slate-600">{property.location}</p>
+                    </div>
+                    <span className="text-lg font-bold text-primarySite">
+                      {property.price}
+                    </span>
+                  </div>
                 </div>
-              ))}
-            </div>
-
-            {/* Indicators */}
-            <div className="flex gap-4 mt-[522px] items-center">
-              {images.map((img, idx) => (
-                <div
-                  key={idx}
-                  onClick={() => setImage(img)}
-                  className={cn(
-                    "rounded-full border-primarySite h-8 w-8 flex items-center justify-center cursor-pointer",
-                    image === img && "border-[1px]"
-                  )}
-                >
-                  <div
-                    className={cn(
-                      "rounded-full bg-slate-600 h-4 w-4",
-                      image === img && "bg-primarySite"
-                    )}
-                  ></div>
-                </div>
-              ))}
-            </div>
+              </motion.div>
+            ))}
           </div>
         </div>
 
-        {/* Mobile: Right Section */}
-        <div className="flex md:hidden gap-4">
-          {/* Main (Selected) Image on Mobile */}
-          <div className="md:max-w-[404px] max-w-[300px] h-full flex items-center justify-center">
-            <div className="md:w-[404px] w-[300px] md:h-[582px] h-[400px] relative bg-slate-500">
-              <Image src={image} alt="property" fill className="object-cover" />
-              {/* Info Overlay */}
-              <div className="absolute bottom-5 left-5 h-[130px] w-[219px] bg-white bg-opacity-50 backdrop-blur-sm flex flex-col items-center justify-center">
-                <div className="flex items-center">
-                  <p
-                    className={cn(
-                      poppins.className,
-                      "text-[#616161] font-medium ml-10 "
-                    )}
-                  >
-                    {String(images.indexOf(image) + 1).padStart(2, "0")}
-                  </p>
-                  <p
-                    className={cn(
-                      poppins.className,
-                      "text-[#616161] font-medium ml-10 relative"
-                    )}
-                  >
-                    <span className="absolute left-[-52%] translate-y-[50%] translate-x-[52%] bottom-[50%] w-8 h-[2px] bg-[#616161]" />
-                    Downtown Loft
-                  </p>
-                </div>
-                <h1
-                  className={cn(
-                    poppins.className,
-                    "font-semibold text-[28px] text-[#3A3A3A]"
-                  )}
-                >
-                  Your Dream Home
-                </h1>
-              </div>
-              {/* Next Arrow Button (optional placeholder) */}
-              <div className="absolute bottom-5 left-[239px] h-[50px] w-[50px] z-10 bg-primarySite flex items-center justify-center">
-                <Button variant="ghost" className="hover:bg-transparent h-full w-full">
-                  <ArrowRight color="white" className="!h-8 !w-8" />
-                </Button>
-              </div>
-            </div>
-          </div>
-
-          {/* Additional (Thumbnail) Images on Mobile */}
-          <div className="relative flex flex-col gap-4">
-            <div className="flex md:h-[486px] h-[350px] items-start gap-8 absolute">
-              {images.slice(1).map((img, idx) => (
-                <div
-                  key={idx}
-                  className="md:w-[372px] md:h-[486px] w-[300px] h-[350px] relative bg-slate-500 cursor-pointer"
-                  onClick={() => setImage(img)}
-                >
-                  <Image src={img} alt={`property_${idx}`} fill className="object-cover" />
-                </div>
-              ))}
-            </div>
-
-            {/* Indicators */}
-            <div className="flex gap-4 md:mt-[522px] mt-[360px] items-center">
-              {images.map((img, idx) => (
-                <div
-                  key={idx}
-                  onClick={() => setImage(img)}
-                  className={cn(
-                    "rounded-full border-primarySite h-8 w-8 flex items-center justify-center cursor-pointer",
-                    image === img && "border-[1px]"
-                  )}
-                >
-                  <div
-                    className={cn(
-                      "rounded-full bg-slate-600 h-4 w-4",
-                      image === img && "bg-primarySite"
-                    )}
-                  ></div>
-                </div>
-              ))}
-            </div>
-          </div>
+        {/* Progress Indicators */}
+        <div className="flex justify-center gap-2 mt-12">
+          {properties.map((_, index) => (
+            <motion.div
+              key={index}
+              className={cn(
+                "h-[3px] bg-slate-300 rounded-full transition-all",
+                index === activeProperty ? "bg-primarySite w-16" : "w-8"
+              )}
+              initial={{ scale: 0.9 }}
+              animate={{ scale: index === activeProperty ? 1.1 : 1 }}
+            />
+          ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

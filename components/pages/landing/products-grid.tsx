@@ -4,38 +4,19 @@ import { Poppins } from "next/font/google";
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "500", "600", "700"] });
 
-const ListingsGrid = () => {
-  const properties = [
-    {
-      title: "Oceanview Villa",
-      description: "A luxurious villa with a stunning view of the Atlantic Ocean.",
-      price: "7,800,000 MAD",
-      imageUrl: "/house_1.jpg",
-      location: "Tangier"
-    },
-    {
-      title: "Riad Elegance",
-      description: "A beautifully restored riad with a classic Moroccan design.",
-      price: "3,200,000 MAD",
-      imageUrl: "/house_2.jpg",
-      location: "Marrakech"
-    },
-    {
-      title: "Modern City Loft",
-      description: "A modern, high-end loft in the heart of the city.",
-      price: "2,400,000 MAD",
-      imageUrl: "/house_3.jpg",
-      location: "Casablanca"
-    },
-    {
-      title: "Kasbah Charm",
-      description: "A historic property near the heart of the old medina.",
-      price: "5,000,000 MAD",
-      imageUrl: "/house_4.jpg",
-      location: "Chefchaouen"
-    },
-  ];
+export interface Property {
+  title: string;
+  description: string;
+  price: string;
+  imageUrl: string;
+  location: string;
+}
 
+interface ProductsGridProps {
+  properties: Property[];
+}
+
+const ProductsGrid = ({ properties }: ProductsGridProps) => {
   return (
     <div className="flex flex-col gap-8 justify-center items-center md:px-16 px-10 py-12 w-full bg-white">
       <div className="text-center text-black flex flex-col">
@@ -60,4 +41,4 @@ const ListingsGrid = () => {
   );
 };
 
-export default ListingsGrid;
+export default ProductsGrid;

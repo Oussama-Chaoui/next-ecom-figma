@@ -1,6 +1,8 @@
+"use client";
 import { cn } from "@/components/lib/utils/twMerge";
 import { Poppins } from "next/font/google";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 const poppins = Poppins({ subsets: ['latin'], weight: ["400", "500", "600", "700"] });
 
@@ -20,8 +22,21 @@ const Mosaic = () => {
   return (
     <div className={cn(poppins.className, "w-full overflow-hidden p-10 bg-white")}>
       <div className="flex flex-col gap-4 items-center justify-center mb-[-20px]">
-        <h2 className="text-[20px] font-semibold text-[#616161]">Showcase Your Dream Property With</h2>
-        <h2 className="text-[40px] font-bold text-[#3A3A3A]">#LiveWithEstato</h2>
+        <h2 className="text-[20px] font-semibold text-[#616161]">
+          Showcase Your Dream Property With
+        </h2>
+        <motion.h2
+          initial={{ color: "#B88E2F" }}
+          animate={{ color: ["#B88E2F", "#D4A144", "#B88E2F"] }}
+          transition={{
+            duration: 5,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="text-[40px] font-bold"
+        >
+          # LiveWithEstato
+        </motion.h2>
       </div>
       <div className="flex gap-5 justify-center ">
         <div className="flex flex-col gap-y-5">
@@ -34,10 +49,10 @@ const Mosaic = () => {
             </div>
           </div>
           <div className="flex gap-5">
-            <div className="bg-red-500  h-[323px] w-[381px]">
+            <div className="bg-red-500 h-[323px] w-[381px]">
               <Image src={images[2].url} alt={images[2].alt} width={381} height={323} />
             </div>
-            <div className="bg-blue-500 h-[242px] w-[344px] ">
+            <div className="bg-blue-500 h-[242px] w-[344px]">
               <Image src={images[3].url} alt={images[3].alt} width={344} height={242} />
             </div>
           </div>
@@ -57,17 +72,17 @@ const Mosaic = () => {
             </div>
           </div>
           <div className="flex gap-5">
-            <div className="bg-red-500  h-[242px] w-[178px]">
+            <div className="bg-red-500 h-[242px] w-[178px]">
               <Image src={images[7].url} alt={images[7].alt} width={178} height={242} />
             </div>
-            <div className="bg-blue-500 h-[196px] w-[258px] ">
+            <div className="bg-blue-500 h-[196px] w-[258px]">
               <Image src={images[8].url} alt={images[8].alt} width={258} height={196} />
             </div>
           </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Mosaic
+export default Mosaic;

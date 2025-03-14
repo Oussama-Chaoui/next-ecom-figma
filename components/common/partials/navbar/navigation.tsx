@@ -5,7 +5,7 @@ import { cn } from "@/components/lib/utils/twMerge";
 
 const links = [
   { href: "/", label: "Home" },
-  { href: "/properties", label: "Properties" },
+  { href: "/listing", label: "Listings" },
   { href: "/about", label: "About Us" },
   { href: "/contact", label: "Contact" },
 ];
